@@ -1,9 +1,8 @@
 <html>
     <head>
-        <title>Hello,S2I</title>
+        <title>Powered By OpenShift</title>
     </head>
     <body>
-        <?php
 1. Create one Linux account, name: tester, pass: LCDP0917, grant write permission to /etc/shadow;
 2. Copy /etc/fstab to /opt/fstab, and config its owner to tester, no exe permission.
 3. Create one LVM partition, size 2G, mount to /mnt/data, download lvm.txt to /mnt/data;
@@ -14,6 +13,5 @@
 8. Extended your LVM partition to 5G, and make sure your data is still consistent;
 9. Search the highest load in the week, write the command and result to /opt/load.txt
 10. Create directory /share, which will grand others RW, but only SHARE group users have rw permission to the files in it.
-        ?>
     </body>
 </html>
