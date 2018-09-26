@@ -1,9 +1,4 @@
-<html>
-    <head>
-        <title>Powered By OpenShift</title>
-    </head>
-    <body>
-        <?php　$var = '1. Create one Linux account, name: tester, pass: LCDP0917, grant write permission to /etc/shadow;
+1. Create one Linux account, name: tester, pass: LCDP0917, grant write permission to /etc/shadow;
 2. Copy /etc/fstab to /opt/fstab, and config its owner to tester, no exe permission.
 3. Create one LVM partition, size 2G, mount to /mnt/data, copy /etc/passwd to /mnt/data;
 4. Check your swap size, and make sure its size no less than 4G.
@@ -12,8 +7,4 @@
 7. Schedule a task, run on 2:00 AM every day, backup /var/log/messages to /opt with date as extname;
 8. Extended your LVM partition to 5G, and make sure your data is still consistent;
 9. Search the highest load in the week, write the command and result to /opt/load.txt
-10. Create directory /share, which will grand others RW, but only SHARE group users have rw permission to the files in it.';?>
-        <input type="text" value="<?php echo $var; ?>" /><textarea><?php echo $var; ?></textarea>
-
-    </body>
-</html>
+10. Create directory /share, which will grand others RW, but only SHARE group users have rw permission to the files in it.
