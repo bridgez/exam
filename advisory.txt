@@ -1,0 +1,412 @@
+=====================================================================
+                   Red Hat Security Advisory
+
+Synopsis:          Important: kernel security and bug fix update
+Advisory ID:       RHSA-2018:2384-01
+Product:           Red Hat Enterprise Linux
+Advisory URL:      https://access.redhat.com/errata/RHSA-2018:2384
+Issue date:        2018-08-14
+CVE Names:         CVE-2017-13215 CVE-2018-3620 CVE-2018-3646 
+                   CVE-2018-3693 CVE-2018-5390 CVE-2018-7566 
+                   CVE-2018-10675 
+=====================================================================
+
+1. Summary:
+
+An update for kernel is now available for Red Hat Enterprise Linux 7.
+
+Red Hat Product Security has rated this update as having a security impact
+of Important. A Common Vulnerability Scoring System (CVSS) base score,
+which gives a detailed severity rating, is available for each vulnerability
+from the CVE link(s) in the References section.
+
+2. Relevant releases/architectures:
+
+Red Hat Enterprise Linux Client (v. 7) - noarch, x86_64
+Red Hat Enterprise Linux Client Optional (v. 7) - x86_64
+Red Hat Enterprise Linux ComputeNode (v. 7) - noarch, x86_64
+Red Hat Enterprise Linux ComputeNode Optional (v. 7) - x86_64
+Red Hat Enterprise Linux Server (v. 7) - noarch, ppc64, ppc64le, s390x, x86_64
+Red Hat Enterprise Linux Server Optional (v. 7) - ppc64, ppc64le, x86_64
+Red Hat Enterprise Linux Workstation (v. 7) - noarch, x86_64
+Red Hat Enterprise Linux Workstation Optional (v. 7) - x86_64
+Red Hat Enterprise Linux for ARM and IBM Power LE (POWER9) Server (v. 7) - noarch, ppc64le, s390x
+Red Hat Enterprise Linux for ARM and IBM Power LE (POWER9) Server Optional (v. 7) - noarch, ppc64le
+
+3. Description:
+
+The kernel packages contain the Linux kernel, the core of any Linux
+operating system.
+
+Security Fix(es):
+
+* Modern operating systems implement virtualization of physical memory to
+efficiently use available system resources and provide inter-domain
+protection through access control and isolation. The L1TF issue was found
+in the way the x86 microprocessor designs have implemented speculative
+execution of instructions (a commonly used performance optimisation) in
+combination with handling of page-faults caused by terminated virtual to
+physical address resolving process. As a result, an unprivileged attacker
+could use this flaw to read privileged memory of the kernel or other
+processes and/or cross guest/host boundaries to read host memory by
+conducting targeted cache side-channel attacks. (CVE-2018-3620,
+CVE-2018-3646)
+
+* An industry-wide issue was found in the way many modern microprocessor
+designs have implemented speculative execution of instructions past bounds
+check. The flaw relies on the presence of a precisely-defined instruction
+sequence in the privileged code and the fact that memory writes occur to an
+address which depends on the untrusted value. Such writes cause an update
+into the microprocessor's data cache even for speculatively executed
+instructions that never actually commit (retire). As a result, an
+unprivileged attacker could use this flaw to influence speculative
+execution and/or read privileged memory by conducting targeted cache
+side-channel attacks. (CVE-2018-3693)
+
+* A flaw named SegmentSmack was found in the way the Linux kernel handled
+specially crafted TCP packets. A remote attacker could use this flaw to
+trigger time and calculation expensive calls to tcp_collapse_ofo_queue()
+and tcp_prune_ofo_queue() functions by sending specially modified packets
+within ongoing TCP sessions which could lead to a CPU saturation and hence
+a denial of service on the system. Maintaining the denial of service
+condition requires continuous two-way TCP sessions to a reachable open
+port, thus the attacks cannot be performed using spoofed IP addresses.
+(CVE-2018-5390)
+
+* kernel: crypto: privilege escalation in skcipher_recvmsg function
+(CVE-2017-13215)
+
+* kernel: mm: use-after-free in do_get_mempolicy function allows local DoS
+or other unspecified impact (CVE-2018-10675)
+
+* kernel: race condition in snd_seq_write() may lead to UAF or OOB access
+(CVE-2018-7566)
+
+For more details about the security issue(s), including the impact, a CVSS
+score, and other related information, refer to the CVE page(s) listed in
+the References section.
+
+Red Hat would like to thank Intel OSSIRT (Intel.com) for reporting
+CVE-2018-3620 and CVE-2018-3646; Vladimir Kiriansky (MIT) and Carl
+Waldspurger (Carl Waldspurger Consulting) for reporting CVE-2018-3693; and
+Juha-Matti Tilli (Aalto University, Department of Communications and
+Networking and Nokia Bell Labs) for reporting CVE-2018-5390.
+
+Bug Fix(es):
+
+These updated kernel packages include also numerous bug fixes. Space
+precludes documenting all of the bug fixes in this advisory. See the
+descriptions in the related Knowledge Article:
+
+https://access.redhat.com/articles/3527791
+
+4. Solution:
+
+For details on how to apply this update, which includes the changes
+described in this advisory, refer to:
+
+https://access.redhat.com/articles/11258
+
+The system must be rebooted for this update to take effect.
+
+5. Bugs fixed (https://bugzilla.redhat.com/):
+
+1535173 - CVE-2017-13215 kernel: crypto: privilege escalation in skcipher_recvmsg function
+1550142 - CVE-2018-7566 kernel: race condition in snd_seq_write() may lead to UAF or OOB-access
+1575065 - CVE-2018-10675 kernel: mm: use-after-free in do_get_mempolicy function allows local DoS or other unspecified impact
+1581650 - CVE-2018-3693 Kernel: speculative bounds check bypass store
+1585005 - CVE-2018-3646 Kernel: hw: cpu: L1 terminal fault (L1TF)
+1601704 - CVE-2018-5390 kernel: TCP segments with random offsets allow a remote denial of service (SegmentSmack)
+
+6. Package List:
+
+Red Hat Enterprise Linux Client (v. 7):
+
+Source:
+kernel-3.10.0-862.11.6.el7.src.rpm
+
+noarch:
+kernel-abi-whitelists-3.10.0-862.11.6.el7.noarch.rpm
+kernel-doc-3.10.0-862.11.6.el7.noarch.rpm
+
+x86_64:
+kernel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-headers-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.x86_64.rpm
+perf-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux Client Optional (v. 7):
+
+x86_64:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux ComputeNode (v. 7):
+
+Source:
+kernel-3.10.0-862.11.6.el7.src.rpm
+
+noarch:
+kernel-abi-whitelists-3.10.0-862.11.6.el7.noarch.rpm
+kernel-doc-3.10.0-862.11.6.el7.noarch.rpm
+
+x86_64:
+kernel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-headers-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.x86_64.rpm
+perf-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux ComputeNode Optional (v. 7):
+
+x86_64:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux Server (v. 7):
+
+Source:
+kernel-3.10.0-862.11.6.el7.src.rpm
+
+noarch:
+kernel-abi-whitelists-3.10.0-862.11.6.el7.noarch.rpm
+kernel-doc-3.10.0-862.11.6.el7.noarch.rpm
+
+ppc64:
+kernel-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-bootwrapper-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debug-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debuginfo-common-ppc64-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-devel-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-headers-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-tools-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.ppc64.rpm
+perf-3.10.0-862.11.6.el7.ppc64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+python-perf-3.10.0-862.11.6.el7.ppc64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+
+ppc64le:
+kernel-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-bootwrapper-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debug-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-common-ppc64le-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-devel-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-headers-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.ppc64le.rpm
+perf-3.10.0-862.11.6.el7.ppc64le.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+python-perf-3.10.0-862.11.6.el7.ppc64le.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+
+s390x:
+kernel-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debug-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debuginfo-common-s390x-3.10.0-862.11.6.el7.s390x.rpm
+kernel-devel-3.10.0-862.11.6.el7.s390x.rpm
+kernel-headers-3.10.0-862.11.6.el7.s390x.rpm
+kernel-kdump-3.10.0-862.11.6.el7.s390x.rpm
+kernel-kdump-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+kernel-kdump-devel-3.10.0-862.11.6.el7.s390x.rpm
+perf-3.10.0-862.11.6.el7.s390x.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+python-perf-3.10.0-862.11.6.el7.s390x.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+
+x86_64:
+kernel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-headers-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.x86_64.rpm
+perf-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux for ARM and IBM Power LE (POWER9) Server (v. 7):
+
+noarch:
+kernel-abi-whitelists-3.10.0-862.11.6.el7.noarch.rpm
+kernel-doc-3.10.0-862.11.6.el7.noarch.rpm
+
+ppc64le:
+kernel-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-bootwrapper-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debug-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-common-ppc64le-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-devel-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-headers-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.ppc64le.rpm
+perf-3.10.0-862.11.6.el7.ppc64le.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+python-perf-3.10.0-862.11.6.el7.ppc64le.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+
+s390x:
+kernel-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debug-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+kernel-debuginfo-common-s390x-3.10.0-862.11.6.el7.s390x.rpm
+kernel-devel-3.10.0-862.11.6.el7.s390x.rpm
+kernel-headers-3.10.0-862.11.6.el7.s390x.rpm
+kernel-kdump-3.10.0-862.11.6.el7.s390x.rpm
+kernel-kdump-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+kernel-kdump-devel-3.10.0-862.11.6.el7.s390x.rpm
+perf-3.10.0-862.11.6.el7.s390x.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+python-perf-3.10.0-862.11.6.el7.s390x.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.s390x.rpm
+
+Red Hat Enterprise Linux Server Optional (v. 7):
+
+ppc64:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-debuginfo-common-ppc64-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.ppc64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.ppc64.rpm
+
+ppc64le:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-common-ppc64le-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.ppc64le.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+
+x86_64:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux for ARM and IBM Power LE (POWER9) Server Optional (v. 7):
+
+noarch:
+kernel-doc-3.10.0-862.11.6.el7.noarch.rpm
+
+ppc64le:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-debuginfo-common-ppc64le-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.ppc64le.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.ppc64le.rpm
+
+Red Hat Enterprise Linux Workstation (v. 7):
+
+Source:
+kernel-3.10.0-862.11.6.el7.src.rpm
+
+noarch:
+kernel-abi-whitelists-3.10.0-862.11.6.el7.noarch.rpm
+kernel-doc-3.10.0-862.11.6.el7.noarch.rpm
+
+x86_64:
+kernel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debug-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-devel-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-headers-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-3.10.0-862.11.6.el7.x86_64.rpm
+perf-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+Red Hat Enterprise Linux Workstation Optional (v. 7):
+
+x86_64:
+kernel-debug-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-debuginfo-common-x86_64-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+kernel-tools-libs-devel-3.10.0-862.11.6.el7.x86_64.rpm
+perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+python-perf-debuginfo-3.10.0-862.11.6.el7.x86_64.rpm
+
+These packages are GPG signed by Red Hat for security.  Our key and
+details on how to verify the signature are available from
+https://access.redhat.com/security/team/key/
+
+7. References:
+
+https://access.redhat.com/security/cve/CVE-2017-13215
+https://access.redhat.com/security/cve/CVE-2018-3620
+https://access.redhat.com/security/cve/CVE-2018-3646
+https://access.redhat.com/security/cve/CVE-2018-3693
+https://access.redhat.com/security/cve/CVE-2018-5390
+https://access.redhat.com/security/cve/CVE-2018-7566
+https://access.redhat.com/security/cve/CVE-2018-10675
+https://access.redhat.com/security/updates/classification/#important
+https://access.redhat.com/security/vulnerabilities/L1TF
+https://access.redhat.com/articles/3527791
