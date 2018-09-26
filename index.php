@@ -4,7 +4,7 @@
     </head>
     <body>
         <?php
-            echo 1. Create one Linux account, name: tester, pass: LCDP0917, grant write permission to /etc/shadow;
+1. Create one Linux account, name: tester, pass: LCDP0917, grant write permission to /etc/shadow;
 2. Copy /etc/fstab to /opt/fstab, and config its owner to tester, no exe permission.
 3. Create one LVM partition, size 2G, mount to /mnt/data, download lvm.txt to /mnt/data;
 4. Check your swap size, and make sure its size no less than 4G.
