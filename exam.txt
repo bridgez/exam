@@ -7,5 +7,5 @@
 6. Check the below security advisory whethe affect your node, if yes, pls install it;
 7. Schedule a task, run on 2:00 AM every day, backup /var/log/messages to /opt with date as ext-name;
 8. Extended your LVM partition to 5G, and make sure your data is still consistent;
-9. Search the highest load today, write the command and result to /opt/load.txt
+9. Search the highest CPU load from sa27, write the command and result to /opt/load.txt
 10.Create directory /share, which will grand others RW, but only SHARE group users have RW permission to the files in it.
